@@ -1,0 +1,79 @@
+
+Circular linked list for insertion.
+
+import java.util.Scanner;
+public class CircularLinkedList 
+{
+    public static Node<Integer> heads=null;
+    public static Node<Integer> tails=null;
+    
+    public static Node<Integer> InsertAtStart()
+    {
+    	Scanner a = new Scanner(System.in);
+		int data = a.nextInt();
+		Node<Integer> final=null;
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+				final=newNode;
+
+			}
+			else
+			{   
+
+				heads= newNode; 
+				heads.next=tails;
+				tails=heads;
+			} 
+			data = a.nextInt();
+		}
+		final.next=heads;
+		return heads;
+    }
+	public static Node<Integer> InsertAtEnding()
+	{
+	    Scanner a = new Scanner(System.in);
+		int data = a.nextInt();
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{
+				tails.next= newNode; 
+				tails = newNode;
+				tails.next=heads;
+			} 
+			data = a.nextInt();
+		}
+		return heads;
+	}
+	public static void  print(Node<Integer> heads)
+	{
+		if(heads==null)
+		{
+			return;
+		}
+		Node<Integer> tails = heads;
+		do
+		{
+			System.out.println(tails.data);
+			tails=tails.next;
+		}
+		while(tails!=heads);
+	}
+	public static void main(String[] args) 
+	{
+		Node<Integer> heads = InsertAtStart();
+		print(heads);
+        }
+}
