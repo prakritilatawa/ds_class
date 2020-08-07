@@ -1,0 +1,306 @@
+DATA STRUCTURE
+
+1.  Find the duplicate elements in an array with a complexity O[n].And also Check for 0 and negative values.
+Sol 1.  public class duplicate_numbers 
+{
+	public static void print_repeat(int arr[], int size) 
+    { 
+        int i;   
+        System.out.println("The repeating elements are : "); 
+     
+        for (i = 0; i < size; i++) 
+        { 
+            if (arr[ Math.abs(arr[i])] >= 0) 
+                arr[ Math.abs(arr[i])] = -arr[ Math.abs(arr[i])]; 
+            else
+                System.out.print(Math.abs(arr[i]) + " "); 
+        }          
+    }  
+    public static void main(String[] args)  
+    { 
+        int arr[] = {1, 4, 3, 5, 3, 6, 6}; 
+        int arr_size = arr.length; 
+        print_repeat(arr, arr_size); 
+    } 
+
+}
+
+
+
+2.  Circular Linked list for insertion.
+Sol 2.  import java.util.Scanner;
+public class CircularLinkedList 
+{
+    public static Node<Integer> heads=null;
+    public static Node<Integer> tails=null;
+    
+    public static Node<Integer> InsertAtStart()
+    {
+    	Scanner a = new Scanner(System.in);
+		int data = a.nextInt();
+		Node<Integer> final=null;
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+				final=newNode;
+
+			}
+			else
+			{   
+
+				heads= newNode; 
+				heads.next=tails;
+				tails=heads;
+			} 
+			data = a.nextInt();
+		}
+		final.next=heads;
+		return heads;
+    }
+	public static Node<Integer> InsertAtEnding()
+	{
+	    Scanner a = new Scanner(System.in);
+		int data = a.nextInt();
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{
+				tails.next= newNode; 
+				tails = newNode;
+				tails.next=heads;
+			} 
+			data = a.nextInt();
+		}
+		return heads;
+	}
+	public static void  print(Node<Integer> heads)
+	{
+		if(heads==null)
+		{
+			return;
+		}
+		Node<Integer> tails = heads;
+		do
+		{
+			System.out.println(tails.data);
+			tails=tails.next;
+		}
+		while(tails!=heads);
+	}
+	public static void main(String[] args) 
+	{
+		Node<Integer> heads = InsertAtStart();
+		print(heads);
+        }
+}
+
+
+
+3.  Enter elements in a linked list and find their average
+Sol 3. LinkedList_FindAvg.java 
+import java.util.Scanner;
+ class Node<T> 
+{
+    T data;
+    Node<T> next;
+    Node(T data)
+    {
+ 	   this.data=data;
+ 	   next=null;
+    }
+}
+public class LinkedList_FindAvg 
+{
+	public static Node<Integer> takeInput()
+	{
+		Node<Integer> heads = null,tails=null;
+		Scanner a = new Scanner(System.in);
+		int info = a.nextInt();
+		while(info!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(info);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{	
+				tails.next= newNode; 
+				tails= newNode;
+			} 
+			info = a.nextInt();
+		}
+		return heads;
+	}
+	public static void calculate_avg(Node<Integer> heads)
+	{
+		int sum=0,counter=0;
+		while(heads!=null)
+		{
+			sum=sum+heads.info;
+			heads=heads.next;
+			counter++;
+		}
+		int avg=(int)sum/counter;
+		System.out.println(avg);	
+	}	
+	public static void main(String[] args) 
+{
+		Node<Integer> heads = takeInput();	
+		calculate_avg(heads);
+	}
+}
+
+4. Doubly linked list
+Sol 4. class Node
+{
+	int data;
+	Node previous;
+	Node next;
+	Node(int data)
+	{
+		this.data=data;
+	}
+}
+public class DoublyLinkedList 
+{
+	static Node head;
+	public static void insert(int data)
+	{
+		Node newNode = new Node(data);
+		
+		newNode.next=head;
+		newNode.previous=null;
+		
+		if(head!=null)
+		{
+			head.previous=newNode;
+		}	
+		head= newNode;
+	}
+	public static void delete(Node del)
+	{
+		if (head == null || del == null) { 
+            return; 
+        } 
+		 if (head == del) { 
+	            head = del.next; 
+	        }  
+		 if (del.next != null) { 
+	            del.next.previous = del.previous; 
+	        } 
+		 
+		 if (del.previous != null) { 
+	            del.previous.next = del.next; 
+	        } 
+		 return;
+	}	
+	public static void main(String[] args) 
+{
+		insert(2);
+		delete(head.next);
+	}
+}
+
+5. Detect loop and linked list.
+Sol 5.    public class DetectLoopInLinkedList
+ {
+public static void detectLoop(Node<Integer> heads)
+	{
+        Node slower_p = heads, faster_p = heads; 
+        int f = 0; 
+        while (slower_p != null && faster_p != null && faster_p.next != null) 
+           { 
+            slower_p = slower_p.next; 
+            faster_p = faster_p.next.next; 
+            if (slower_p == faster_p) { 
+                f = 1; 
+                break; 
+            } 
+        } 
+        if (f == 1) 
+            System.out.println("Loop found"); 
+        else
+            System.out.println("Loop not found");	
+	}
+  
+  public static void main(String[] args) 
+        {
+ 		Node<Integer> heads = new Node<Integer>(7);
+		detectLoop(heads);	
+	}
+}
+
+
+6. Reverse linked list
+Sol 6. import java.util.Scanner;
+   public class ReverseLinkedList 
+{
+   public static Node<Integer> takeInput()
+	{
+		Node<Integer> heads = null,tails=null;
+		Scanner scan = new Scanner(System.in);
+		int data = scan.nextInt();
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{	
+				tails.next= newNode; 
+				tails= newNode;
+			} 
+			data = scan.nextInt();
+		}
+		return heads;
+	}
+	public static Node<Integer> reverseR(Node<Integer> heads)
+	{
+		if(heads==null||heads.next==null)
+		{
+			return heads;
+		}
+		Node<Integer> finalHead=reverseR(heads.next);
+		Node<Integer> temp= finalHead;
+		while(temp.next!=null)
+		{
+			temp=temp.next;
+		}
+		temp.next=heads;
+		heads.next=null;
+		return finalHead;
+	}
+	public static void main(String[] args) 
+       {
+		Node<Integer> head = takeInput();
+		reverseR(heads);		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
