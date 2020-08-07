@@ -1,0 +1,26 @@
+
+Find the duplicate elements in an array with a complexity O[n].And also Check for 0 and negative values.
+
+public class duplicate_numbers 
+{
+	public static void print_repeat(int arr[], int size) 
+    { 
+        int i;   
+        System.out.println("The repeating elements are : "); 
+     
+        for (i = 0; i < size; i++) 
+        { 
+            if (arr[ Math.abs(arr[i])] >= 0) 
+                arr[ Math.abs(arr[i])] = -arr[ Math.abs(arr[i])]; 
+            else
+                System.out.print(Math.abs(arr[i]) + " "); 
+        }          
+    }  
+    public static void main(String[] args)  
+    { 
+        int arr[] = {1, 4, 3, 5, 3, 6, 6}; 
+        int arr_size = arr.length; 
+        print_repeat(arr, arr_size); 
+    } 
+
+}
