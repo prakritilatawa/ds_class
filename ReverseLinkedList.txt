@@ -1,0 +1,47 @@
+import java.util.Scanner;
+   public class ReverseLinkedList 
+{
+   public static Node<Integer> takeInput()
+	{
+		Node<Integer> heads = null,tails=null;
+		Scanner scan = new Scanner(System.in);
+		int data = scan.nextInt();
+		while(data!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(data);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{	
+				tails.next= newNode; 
+				tails= newNode;
+			} 
+			data = scan.nextInt();
+		}
+		return heads;
+	}
+	public static Node<Integer> reverseR(Node<Integer> heads)
+	{
+		if(heads==null||heads.next==null)
+		{
+			return heads;
+		}
+		Node<Integer> finalHead=reverseR(heads.next);
+		Node<Integer> temp= finalHead;
+		while(temp.next!=null)
+		{
+			temp=temp.next;
+		}
+		temp.next=heads;
+		heads.next=null;
+		return finalHead;
+	}
+	public static void main(String[] args) 
+       {
+		Node<Integer> head = takeInput();
+		reverseR(heads);		
+	}
+}

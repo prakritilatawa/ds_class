@@ -1,0 +1,30 @@
+
+Detect loop and linked list.
+
+ public class DetectLoopInLinkedList
+ {
+public static void detectLoop(Node<Integer> heads)
+	{
+        Node slower_p = heads, faster_p = heads; 
+        int f = 0; 
+        while (slower_p != null && faster_p != null && faster_p.next != null) 
+           { 
+            slower_p = slower_p.next; 
+            faster_p = faster_p.next.next; 
+            if (slower_p == faster_p) { 
+                f = 1; 
+                break; 
+            } 
+        } 
+        if (f == 1) 
+            System.out.println("Loop found"); 
+        else
+            System.out.println("Loop not found");	
+	}
+  
+  public static void main(String[] args) 
+        {
+ 		Node<Integer> heads = new Node<Integer>(7);
+		detectLoop(heads);	
+	}
+}

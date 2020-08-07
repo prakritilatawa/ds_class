@@ -1,0 +1,57 @@
+
+Enter elements in a linked list and find their average
+
+LinkedList_FindAvg.java 
+import java.util.Scanner;
+ class Node<T> 
+{
+    T data;
+    Node<T> next;
+    Node(T data)
+    {
+ 	   this.data=data;
+ 	   next=null;
+    }
+}
+public class LinkedList_FindAvg 
+{
+	public static Node<Integer> takeInput()
+	{
+		Node<Integer> heads = null,tails=null;
+		Scanner a = new Scanner(System.in);
+		int info = a.nextInt();
+		while(info!=-1)
+		{
+			Node<Integer> newNode = new Node<Integer>(info);
+			if(heads==null)
+			{
+				heads= newNode;
+				tails = newNode;
+			}
+			else
+			{	
+				tails.next= newNode; 
+				tails= newNode;
+			} 
+			info = a.nextInt();
+		}
+		return heads;
+	}
+	public static void calculate_avg(Node<Integer> heads)
+	{
+		int sum=0,counter=0;
+		while(heads!=null)
+		{
+			sum=sum+heads.info;
+			heads=heads.next;
+			counter++;
+		}
+		int avg=(int)sum/counter;
+		System.out.println(avg);	
+	}	
+	public static void main(String[] args) 
+{
+		Node<Integer> heads = takeInput();	
+		calculate_avg(heads);
+	}
+}
